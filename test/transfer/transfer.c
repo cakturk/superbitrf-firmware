@@ -29,7 +29,7 @@
 #include "../../src/modules/cyrf6936.h"
 
 /* The packet that it sended */
-static const u8 packet[16] = {
+static const uint8_t packet[16] = {
 			0x00,
 			0x01,
 			0x02,
@@ -56,7 +56,7 @@ void on_send(bool error);
 void on_timer(void) {
 	// Sen the packet
 	cyrf_send(packet);
-	LED_TOGGLE(2);
+	LED_TOGGLE(LED_BIND);
 
 	// Set timeout for next send
 	timer_dsm_set(10000);
@@ -65,11 +65,11 @@ void on_timer(void) {
 /* When the cyrf chip receives a packet */
 void on_receive(bool error) {
 	int i, count;
-	u8 packet_buf[16];
+	uint8_t packet_buf[16];
 	char cdc_msg[512];
-	u8 rx_status;
+	uint8_t rx_status;
 
-	LED_TOGGLE(1);
+	LED_TOGGLE(LED_RX);
 
 	// Check the rx status
 	rx_status = cyrf_read_register(CYRF_RX_STATUS);
@@ -94,7 +94,7 @@ void on_receive(bool error) {
 			count++;
 	}
 	if(count >= 16)
-		LED_TOGGLE(2);
+		LED_TOGGLE(LED_TX);
 
 	// Start receiving for the next packet
 	cyrf_start_recv();
@@ -102,15 +102,15 @@ void on_receive(bool error) {
 
 /* When the cyrf chip successfully sended the packet */
 void on_send(bool error) {
-	LED_TOGGLE(POWER);
+	LED_TOGGLE(LED_TX);
 }
 
 int main(void)
 {
-	u8 sop_code[] = {
+	uint8_t sop_code[] = {
 		0x03, 0xE7, 0x6E, 0x8A, 0xEF, 0xBD, 0xFE, 0xF8
 	};
-	u8 data_code[] = {
+	uint8_t data_code[] = {
 		0x88, 0x17, 0x13, 0x3B, 0x2D, 0xBF, 0x06, 0xD6
 	};
 	rcc_clock_setup_in_hse_12mhz_out_72mhz();

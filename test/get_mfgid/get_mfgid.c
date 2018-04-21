@@ -28,17 +28,17 @@
 #include <unistd.h>
 
 void initialise_monitor_handles(void);
-void CYRF_WriteRegister(u8 address, u8 data);
-void Delay(u32 x);
+void CYRF_WriteRegister(uint8_t address, uint8_t data);
+void Delay(uint32_t x);
 void CYRF_Reset(void);
-void CYRF_GetMfgData(u8 data[]);
+void CYRF_GetMfgData(uint8_t data[]);
 
 #define CS_HI() gpio_set(GPIOA, GPIO4)
 #define CS_LO() gpio_clear(GPIOA, GPIO4)
 #define RS_HI() gpio_set(GPIOB, GPIO0)
 #define RS_LO() gpio_clear(GPIOB, GPIO0)
 
-void CYRF_WriteRegister(u8 address, u8 data)
+void CYRF_WriteRegister(uint8_t address, uint8_t data)
 {
     CS_LO();
     spi_xfer(SPI1, 0x80 | address);
@@ -46,7 +46,7 @@ void CYRF_WriteRegister(u8 address, u8 data)
     CS_HI();
 }
 
-static void ReadRegisterMulti(u8 address, u8 data[], u8 length)
+static void ReadRegisterMulti(uint8_t address, uint8_t data[], uint8_t length)
 {
     unsigned char i;
 
@@ -59,7 +59,7 @@ static void ReadRegisterMulti(u8 address, u8 data[], u8 length)
     CS_HI();
 }
 
-void Delay(u32 x)
+void Delay(uint32_t x)
 {
     (void)x;
     __asm ("mov r1, #24;"
@@ -81,7 +81,7 @@ void CYRF_Reset(void)
     Delay(100);
 }
 
-void CYRF_GetMfgData(u8 data[])
+void CYRF_GetMfgData(uint8_t data[])
 {
     /* Fuses power on */
     CYRF_WriteRegister(0x25, 0xFF);
@@ -170,7 +170,7 @@ int main(void)
 {
 	int counter = 0;
 	//u16 rx_value = 0x42;
-	u8 cyrfmfg_id[7];
+	uint8_t cyrfmfg_id[7];
 
 	clock_setup();
 	gpio_setup();
