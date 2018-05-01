@@ -48,6 +48,13 @@ LDFLAGS		+= --static -Wl,--start-group -lc -lgcc -Wl,--end-group \
 		   -T$(LDSCRIPT) -nostartfiles -Wl,--gc-sections \
 		   $(ARCH_FLAGS) -mfix-cortex-m3-ldrd
 
+BOARD?=2
+
+ifeq ($(BOARD),2)
+CFLAGS += -DBOARD_V1_0
+LDFLAGS += -Wl,-Ttext=0x8002000
+endif
+
 SEMIHOSTING ?= 0
 
 ifeq ($(SEMIHOSTING),1)

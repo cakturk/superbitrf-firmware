@@ -30,14 +30,6 @@ OBJS += protocol/dsm_receiver.o protocol/dsm_transmitter.o protocol/dsm_mitm.o
 
 include ../Makefile.include
 
-BOARD?=2
-
-ifeq ($(BOARD),2)
-CFLAGS += -DBOARD_V1_0
-LDFLAGS += -Wl,-Ttext=0x8002000
-endif
-
-
 cdw:
 	make flash BMP_PORT=/dev/ttyACM0
 
