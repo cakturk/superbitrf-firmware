@@ -20,6 +20,7 @@
 BINARY = cdcacm
 
 LDSCRIPT = ../../stm32f103cbt6.ld
+PROJECT_ROOT = ../..
 
 include ../../Makefile.include
 

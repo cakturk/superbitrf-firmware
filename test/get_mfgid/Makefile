@@ -22,6 +22,7 @@ BINARY = get_mfgid
 # Comment the following line if you _don't_ have luftboot flashed!
 CFLAGS += -std=c99
 LDSCRIPT = ../../stm32f103cbt6.ld
+PROJECT_ROOT = ../..
 
 SEMIHOSTING=1
 

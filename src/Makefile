@@ -20,6 +20,7 @@
 BINARY = usbrf
 LDSCRIPT = ../stm32f103cbt6.ld
 TOOLCHAIN_DIR = ../libopencm3
+PROJECT_ROOT = ..
 
 # The modules and helpers used for the usbrf module
 OBJS += modules/led.o modules/button.o modules/timer.o modules/cdcacm.o modules/cyrf6936.o modules/config.o

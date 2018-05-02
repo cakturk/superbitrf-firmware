@@ -22,6 +22,7 @@ BINARY = transfer
 OBJS += ../../src/modules/led.o ../../src/modules/timer.o ../../src/modules/cdcacm.o ../../src/modules/cyrf6936.o ../../src/modules/config.o
 
 LDSCRIPT = ../../stm32f103cbt6.ld
+PROJECT_ROOT = ../..
 
 # Check if receiver or transmitter
 ifeq ($(RECEIVER),)

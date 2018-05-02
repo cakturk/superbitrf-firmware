@@ -143,7 +143,7 @@ ifeq ($(BMP_PORT),)
 %.flash: %.bin
 	@printf "  FLASH   $<\n"
 	@# IMPORTANT: Don't use "resume", only "reset" will work correctly!
-	$(Q)../scripts/stm32_mem.py $(*).bin
+	$(Q)$(PROJECT_ROOT)/scripts/stm32_mem.py $(*).bin
 else
 %.flash: %.elf
 	@echo "  GDB   $(*).elf (flash)"
