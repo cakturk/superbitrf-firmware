@@ -24,3 +24,6 @@ PROJECT_ROOT = ../..
 
 include ../../Makefile.include
 
+ifeq ($(BOARD),2)
+OBJS += ../../src/modules/led.o
+endif

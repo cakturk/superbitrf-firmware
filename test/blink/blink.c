@@ -20,6 +20,7 @@
 #include <libopencm3/stm32/rcc.h>
 #include <libopencm3/stm32/gpio.h>
 
+#ifndef BOARD_V1_0
 /* Set STM32 to 72 MHz. */
 static void clock_setup(void)
 {
@@ -59,3 +60,30 @@ int main(void)
 
 	return 0;
 }
+#else
+
+#include "../../src/modules/led.h"
+
+int main(void)
+{
+	int i;
+
+	// Setup the clock
+	led_init();
+
+	LED_ON(1);
+	LED_ON(2);
+	LED_ON(3);
+
+	/* Blink the LED (PC12) on the board. */
+	while (1) {
+		LED_TOGGLE(1);
+		LED_TOGGLE(2);
+		LED_TOGGLE(3);
+		for (i = 0; i < 800000; i++)	/* Wait a bit. */
+			__asm__("nop");
+	}
+
+	return 0;
+}
+#endif
